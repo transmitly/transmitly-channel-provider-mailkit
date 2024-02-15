@@ -31,7 +31,7 @@ jobs:
       - name: Publish (INT)
         run: dotnet nuget push ./src/Transmitly.ChannelProvider.MailKit/bin/Release/Transmitly.ChannelProvider.MailKit*.nupkg -s "NugetTest" -k ${{ secrets.NUGET_INT_API_KEY }}
       - name: Add github source
-        run: dotnet nuget add source --username ${{ secrets.PUBLISH_GITHUB_USERNAME }} --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/transmitly/index.json"
+        run: dotnet nuget add source --username ${{ secrets.PUBLISH_GITHUB_USERNAME }} --password ${{ secrets.PUBLISH_GITHUB_PACKAGE_API_KEY }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/transmitly/index.json"
       - name: Publish (Github)
         run: dotnet nuget push ./src/Transmitly.ChannelProvider.MailKit/bin/Release/Transmitly.ChannelProvider.MailKit*.nupkg --api-key ${{secrets.PUBLISH_GITHUB_PACKAGE_API_KEY}} --source "github"
         
