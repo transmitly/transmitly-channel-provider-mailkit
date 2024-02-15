@@ -26,12 +26,12 @@ jobs:
           versionSpec: '5.x'
       - name: Determine Version
         uses: gittools/actions/gitversion/execute@v0
+      - name: Add Test Source
+        run: dotnet nuget add source https://apiint.nugettest.org/v3/index.json -n nugettest.org
       - name: Build netcore solution
         run: dotnet build Transmitly.ChannelProvider.MailKit.sln --source https://apiint.nugettest.org/v3/index.json --configuration Release -p:AssemblyVersion=${{ env.assemblySemVer }} -p:FileVersion=${{ env.assemblySemFileVer  }} -p:InformationalVersion=${{ env.informationalVersion }}
       #- name: Test
       #  run: dotnet test --no-build --no-restore --configuration Release Transmitly.sln
-      - name: Add Test Source
-        run: dotnet nuget add source https://apiint.nugettest.org/v3/index.json -n nugettest.org
       - name: Package
         run: dotnet pack --no-build --include-source /p:Version=${{ env.majorMinorPatch }}-alpha.${{ env.shortSha }} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
       - name: Publish (INT)
