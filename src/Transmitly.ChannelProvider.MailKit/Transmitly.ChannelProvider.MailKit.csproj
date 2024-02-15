@@ -6,6 +6,21 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<IsPackable>true</IsPackable>
+		<AssemblyVersion>0.0.1</AssemblyVersion>
+		<AssemblyFileVersion>0.0.1</AssemblyFileVersion>
+		<PackageId>Transmitly.ChannelProvider.MailKit</PackageId>
+		<Product>Transmitly</Product>
+		<ProductName>Transmit.ly</ProductName>
+		<Company>Code Impressions</Company>
+		<Title>Transmit.ly MailKit Channel Provider</Title>
+		<Description>A channel provider for the Transmitly communications library.</Description>
+		<Copyright>Copyright © (c) Code Impressions, LLC</Copyright>
+		<Authors>Code Impressions</Authors>
+		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+		<PackageIcon>icon-dark.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<RepositoryUrl>https://github.com/transmitly/transmitly-channel-provider-mailkit.git</RepositoryUrl>
+		<PackageTags>email,mailkit,channel provider,transmitly</PackageTags>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
@@ -13,6 +28,16 @@
 	<PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Include="..\..\assets\icon-dark.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	  <None Include="..\..\README.md">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="MailKit" Version="3.0.0" />
 		<PackageReference Include="Transmitly" Version="0.1.0-*" />
