@@ -10,7 +10,7 @@ To use the MailKit channel provider, first install the [NuGet package](https://n
 dotnet add package Transmitly.ChannelProvider.MailKit
 ```
 
-Then add the channel provider using `AddMailKit()`:
+Then add the channel provider using `AddMailKitSupport()`:
 
 ```csharp
 using Transmitly;
