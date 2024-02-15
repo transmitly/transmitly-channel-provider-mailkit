@@ -29,5 +29,5 @@ jobs:
       - name: Package
         run: dotnet pack --no-build --include-source /p:Version=${{ env.majorMinorPatch }}-alpha.${{ env.shortSha }} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
       - name: Publish (INT)
-        run: dotnet nuget push ./src/Transmitly/bin/Release/Transmitly.ChannelProvider.MailKit*.nupkg -s https://apiint.nugettest.org/v3/index.json -k ${{ secrets.NUGET_INT_API_KEY }}
+        run: dotnet nuget push ./src/Transmitly.ChannelProvider.MailKit/bin/Release/Transmitly.ChannelProvider.MailKit*.nupkg -s https://apiint.nugettest.org/v3/index.json -k ${{ secrets.NUGET_INT_API_KEY }}
         
