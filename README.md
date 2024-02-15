@@ -13,6 +13,8 @@ dotnet add package Transmitly.ChannelProvider.MailKit
 Then add the channel provider using `AddMailKit()`:
 
 ```csharp
+using Transmitly;
+...
 var communicationClient = new CommunicationsClientBuilder()
 	.AddMailKitSupport(options =>
 	{
