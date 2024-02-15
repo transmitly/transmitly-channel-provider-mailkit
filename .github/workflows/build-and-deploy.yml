@@ -1,0 +1,37 @@
+name: Build and Test
+
+on: 
+  workflow_dispatch:
+  push:
+    paths:
+      - "src/Transmitly.ChannelProvider.MailKit/**"
+jobs:
+  windows-build:
+    runs-on: linux-latest
+    steps:
+      - uses: actions/cache@v3
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget-
+      - uses: actions/checkout@v4.1.1
+        with:
+          fetch-depth: 0
+      - name: dotnet
+        uses: actions/setup-dotnet@v3
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0
+        with:
+          versionSpec: '5.x'
+      - name: Determine Version
+        uses: gittools/actions/gitversion/execute@v0
+      - name: Build netcore solution
+        run: dotnet build Transmitly.ChannelProvider.MailKit.sln --configuration Release -p:AssemblyVersion=${{ env.assemblySemVer }} -p:FileVersion=${{ env.assemblySemFileVer  }} -p:InformationalVersion=${{ env.informationalVersion }}
+      #- name: Test
+      #  run: dotnet test --no-build --no-restore --configuration Release Transmitly.sln
+      - name: Package
+        run: dotnet pack --no-build --include-source /p:Version=${{ env.majorMinorPatch }}-alpha.${{ env.shortSha }} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+      - name: Publish (INT)
+        run: dotnet nuget push .\src\Transmitly\bin\Release\Transmitly.ChannelProvider.MailKit*.nupkg -s https://apiint.nugettest.org/v3/index.json -k ${{ secrets.NUGET_INT_API_KEY }}
+        
