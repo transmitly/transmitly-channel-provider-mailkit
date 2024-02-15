@@ -25,7 +25,7 @@ var communicationClient = new CommunicationsClientBuilder()
 		options.Password = "Password";
 	});
 ```
-* See the [Transmitly](https://github.com/transmitly/transmitly) project for more details on what a channel provider is and how it can be configured.
+* Check out the [Transmitly](https://github.com/transmitly/transmitly) project for more details on what a channel provider is and how it can be used to improve how you manage your customer communications.
 
 
 <picture>
