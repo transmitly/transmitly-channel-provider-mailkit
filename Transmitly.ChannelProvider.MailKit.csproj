@@ -14,28 +14,7 @@
 		<ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="MailKit" Version="[3.0.0,)" />
+		<PackageReference Include="MailKit" Version="3.0.0" />
+		<PackageReference Include="Transmitly" Version="0.1.0-*" />
 	</ItemGroup>
-	<ItemGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-		<PackageReference Include="Transmitly" Version="[1.0.0,)" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<ProjectReference Include="..\..\Transmitly\Transmitly.csproj" PackageVersion="1.0.0" />
-	</ItemGroup>
-	<!-- https://github.com/NuGet/Home/issues/5525#issuecomment-1179525536 -->
-	<Target Name="UseExplicitPackageVersions" BeforeTargets="GenerateNuspec">
-		<ItemGroup>
-			<_ProjectReferenceWithExplicitPackageVersion Include="@(ProjectReference->'%(FullPath)')" Condition="'%(ProjectReference.PackageVersion)' != ''" />
-			<_ProjectReferenceWithExactPackageVersion Include="@(ProjectReference->'%(FullPath)')" Condition="'%(ProjectReference.ExactVersion)' == 'true'" />
-			<_ProjectReferenceWithReassignedVersion Include="@(_ProjectReferencesWithVersions)" Condition="'%(Identity)' != '' And '@(_ProjectReferencesWithVersions)' == '@(_ProjectReferenceWithExplicitPackageVersion)'">
-				<ProjectVersion>@(_ProjectReferenceWithExplicitPackageVersion->'%(PackageVersion)')</ProjectVersion>
-			</_ProjectReferenceWithReassignedVersion>
-			<_ProjectReferenceWithReassignedVersion Include="@(_ProjectReferencesWithVersions)" Condition="'%(Identity)' != '' And '@(_ProjectReferencesWithVersions)' == '@(_ProjectReferenceWithExactPackageVersion)'">
-				<ProjectVersion>[@(_ProjectReferencesWithVersions->'%(ProjectVersion)')]</ProjectVersion>
-			</_ProjectReferenceWithReassignedVersion>
-			<_ProjectReferencesWithVersions Remove="@(_ProjectReferenceWithReassignedVersion)" />
-			<_ProjectReferencesWithVersions Include="@(_ProjectReferenceWithReassignedVersion)" />
-		</ItemGroup>
-	</Target>
 </Project>
