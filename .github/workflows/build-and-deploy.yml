@@ -29,7 +29,7 @@ jobs:
       - name: Add Test Source
         run: dotnet nuget add source https://apiint.nugettest.org/v3/index.json -n nugettest.org
       - name: Add Test Source
-        run: dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
+        run: dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget2.org
         
       - name: Build netcore solution
         run: dotnet build Transmitly.ChannelProvider.MailKit.sln --source https://apiint.nugettest.org/v3/index.json --configuration Release -p:AssemblyVersion=${{ env.assemblySemVer }} -p:FileVersion=${{ env.assemblySemFileVer  }} -p:InformationalVersion=${{ env.informationalVersion }}
