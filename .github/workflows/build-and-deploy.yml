@@ -6,7 +6,7 @@ on:
     paths:
       - "src/Transmitly.ChannelProvider.MailKit/**"
 jobs:
-  windows-build:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/cache@v3
@@ -30,6 +30,8 @@ jobs:
         run: dotnet build Transmitly.ChannelProvider.MailKit.sln --source https://apiint.nugettest.org/v3/index.json --configuration Release -p:AssemblyVersion=${{ env.assemblySemVer }} -p:FileVersion=${{ env.assemblySemFileVer  }} -p:InformationalVersion=${{ env.informationalVersion }}
       #- name: Test
       #  run: dotnet test --no-build --no-restore --configuration Release Transmitly.sln
+      - name: Add Test Source
+        run: dotnet nuget add source https://apiint.nugettest.org/v3/index.json -n nugettest.org
       - name: Package
         run: dotnet pack --no-build --include-source /p:Version=${{ env.majorMinorPatch }}-alpha.${{ env.shortSha }} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
       - name: Publish (INT)
