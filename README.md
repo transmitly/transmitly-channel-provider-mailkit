@@ -1,6 +1,6 @@
 # Transmitly.ChannelProvider.MailKit
 
-A [Transmitly](https://github.com/transmitly/transmitly) channel provider that enables sending Email communications through SMTP using MailKit
+A [Transmitly](https://github.com/transmitly/transmitly) channel provider that enables sending Email communications through SMTP using [MailKit](https://github.com/jstedfast/MailKit)
 
 ### Getting started
 
