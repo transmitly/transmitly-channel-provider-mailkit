@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 namespace Transmitly.MailKit
 {
-	internal class MailKitSendResult : IDispatchResult
+	internal sealed class MailKitSendResult : IDispatchResult
 	{
 		public string? ResourceId { get; set; }
 

@@ -24,7 +24,7 @@ using Transmitly.ChannelProvider;
 
 namespace Transmitly.MailKit
 {
-	internal class MailKitChannelProviderClient(MailKitConfigurationOptions optionObj) : ChannelProviderClient<IEmail>
+	internal sealed class MailKitChannelProviderClient(MailKitConfigurationOptions optionObj) : ChannelProviderClient<IEmail>
 	{
 		private readonly MailKitConfigurationOptions _optionObj = Guard.AgainstNull(optionObj);
 
@@ -67,7 +67,7 @@ namespace Transmitly.MailKit
 			string result = await Send(msg, client, cancellationToken).ConfigureAwait(false);
 			var commResult = new MailKitSendResult
 			{
-				IsDelivered = result.Equals("Ok", StringComparison.OrdinalIgnoreCase),
+				IsDelivered = result.Equals("Ok", StringComparison.InvariantCultureIgnoreCase),
 				ResourceId = msg.MessageId,
 				MessageString = result
 			};

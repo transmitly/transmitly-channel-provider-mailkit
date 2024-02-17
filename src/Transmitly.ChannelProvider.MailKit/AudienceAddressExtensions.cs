@@ -20,6 +20,8 @@ namespace Transmitly.MailKit
 	{
 		public static MailboxAddress ToMailboxAddress(this IAudienceAddress internetAddress)
 		{
+			Guard.AgainstNull(internetAddress);
+
 			return new MailboxAddress(internetAddress.Display, internetAddress.Value);
 		}
 	}

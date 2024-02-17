@@ -14,7 +14,7 @@
 
 namespace Transmitly.MailKit
 {
-	public class MailKitConfigurationOptions : IMailKitConfigurationOptions
+	public sealed class MailKitConfigurationOptions : IMailKitConfigurationOptions
 	{
 		public string? Host { get; set; }
 		public int? Port { get; set; }
