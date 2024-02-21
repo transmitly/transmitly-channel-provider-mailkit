@@ -15,6 +15,7 @@
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
+using MimeKit.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,7 +38,7 @@ namespace Transmitly.MailKit
 
 			var msg = new MimeMessage
 			{
-				MessageId = Guid.NewGuid().ToString("N")
+				MessageId = MimeUtils.GenerateMessageId()
 			};
 			msg.From.Add(email.From.ToMailboxAddress());
 			msg.To.AddRange(email.To!.Select(m => m.ToMailboxAddress()));
