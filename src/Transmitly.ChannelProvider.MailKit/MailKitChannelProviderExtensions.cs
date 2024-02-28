@@ -30,17 +30,13 @@ namespace Transmitly
 			return $"{MailKitId}.{(!string.IsNullOrWhiteSpace(providerId) ? providerId : DefaultProviderId)}";
 		}
 
-		public static CommunicationsClientBuilder AddMailKitSupport(this ChannelProviderConfigurationBuilder channelProviderConfiguration, Action<IMailKitConfigurationOptions> options, string? providerId = null)
+		public static CommunicationsClientBuilder AddMailKitSupport(this CommunicationsClientBuilder communicationsClientBuilder, Action<IMailKitConfigurationOptions> options, string? providerId = null)
 		{
 			var optionObj = new MailKitConfigurationOptions();
 			options(optionObj);
 
-			return channelProviderConfiguration.Add(Id.ChannelProvider.MailKit(providerId), new MailKitChannelProviderClient(optionObj), Id.Channel.Email());
-		}
-
-		public static CommunicationsClientBuilder AddMailKitSupport(this CommunicationsClientBuilder communicationsClientBuilder, Action<IMailKitConfigurationOptions> options, string? providerId = null)
-		{
-			return communicationsClientBuilder.ChannelProvider.AddMailKitSupport(options, providerId);
+			communicationsClientBuilder.AddChannelProvider<MailKitChannelProviderClient, IEmail>(Id.ChannelProvider.MailKit(providerId), optionObj, Id.Channel.Email());
+			return communicationsClientBuilder;
 		}
 	}
 }
