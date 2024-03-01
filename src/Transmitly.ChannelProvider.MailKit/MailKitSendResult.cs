@@ -21,8 +21,6 @@ namespace Transmitly.MailKit
 	{
 		public string? ResourceId { get; set; }
 
-		public bool IsDelivered { get; set; }
-
 		public IList<Exception> Exceptions { get; } = new List<Exception>();
 
 		public IList<string> Messages { get; } = new List<string>();
@@ -32,6 +30,6 @@ namespace Transmitly.MailKit
 		public string? ChannelProviderId { get; set; }
 		public string? ChannelId { get; set; }
 
-		public DispatchStatus DispatchStatus { get; }
+		public DispatchStatus DispatchStatus { get; internal set; }
 	}
 }

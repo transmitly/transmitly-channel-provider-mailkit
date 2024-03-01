@@ -68,9 +68,9 @@ namespace Transmitly.MailKit
 			string result = await Send(msg, client, cancellationToken).ConfigureAwait(false);
 			var commResult = new MailKitSendResult
 			{
-				IsDelivered = result.Equals("Ok", StringComparison.InvariantCultureIgnoreCase),
 				ResourceId = msg.MessageId,
-				MessageString = result
+				MessageString = result,
+				DispatchStatus = DispatchStatus.Dispatched
 			};
 			SendDeliveryReports(email, communicationContext, commResult);
 			return [commResult];
@@ -78,15 +78,21 @@ namespace Transmitly.MailKit
 
 		private void SendDeliveryReports(IEmail email, IDispatchCommunicationContext communicationContext, MailKitSendResult commResult)
 		{
-			Dispatched(communicationContext, email);
-			if (commResult.IsDelivered)
-				Delivered(communicationContext, email);
-			else
-				Error(communicationContext, email);
+			switch (commResult.DispatchStatus)
+			{
+				case DispatchStatus.Error:
+					Dispatched(communicationContext, email);
+					break;
+				case DispatchStatus.Dispatched:
+					Error(communicationContext, email);
+					break;
+			}
 		}
 
 		private static async Task<string> Send(MimeMessage msg, SmtpClient client, CancellationToken cancellationToken)
 		{
+			//If SmtpClient.Send() throws an exception, then sending the message failed. If it doesn't throw an exception, then it succeeded.
+			//https://github.com/jstedfast/MailKit/issues/861#issuecomment-496497579
 			var result = await client.SendAsync(msg, cancellationToken).ConfigureAwait(false);
 			await client.DisconnectAsync(true, cancellationToken).ConfigureAwait(false);
 			return result;
