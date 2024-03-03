@@ -11,9 +11,7 @@
 //  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
-
 using System;
-using Transmitly.Channel.Configuration;
 using Transmitly.MailKit;
 
 namespace Transmitly
@@ -21,13 +19,11 @@ namespace Transmitly
 	public static class MailKitChannelProviderExtensions
 	{
 		private const string MailKitId = "MailKit";
-		private const string DefaultProviderId = "Default";
 
-		public static string MailKit(this ChannelProviders channelProviders, string? providerId = DefaultProviderId)
+		public static string MailKit(this ChannelProviders channelProviders, string? providerId = null)
 		{
 			Guard.AgainstNull(channelProviders);
-
-			return $"{MailKitId}.{(!string.IsNullOrWhiteSpace(providerId) ? providerId : DefaultProviderId)}";
+			return channelProviders.GetId(MailKitId, providerId);
 		}
 
 		public static CommunicationsClientBuilder AddMailKitSupport(this CommunicationsClientBuilder communicationsClientBuilder, Action<IMailKitConfigurationOptions> options, string? providerId = null)
