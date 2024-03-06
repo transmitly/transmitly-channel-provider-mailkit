@@ -31,5 +31,7 @@ namespace Transmitly.MailKit
 		public string? ChannelId { get; set; }
 
 		public DispatchStatus DispatchStatus { get; internal set; }
+
+		public Exception? Exception { get; internal set; }
 	}
 }
