@@ -9,5 +9,6 @@ jobs:
   build_test_deploy_channel_provider:
     uses: transmitly/transmitly/.github/workflows/build-and-deploy-channel-provider.yml@main
     with: 
-      secrets: inherit
       channelProviderName: Transmitly.ChannelProvider.MailKit
+    secrets: inherit
+      
