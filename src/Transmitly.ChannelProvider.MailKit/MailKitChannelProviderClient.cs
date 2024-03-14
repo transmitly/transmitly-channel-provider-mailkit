@@ -81,10 +81,10 @@ namespace Transmitly.MailKit
 			switch (commResult.DispatchStatus)
 			{
 				case DispatchStatus.Error:
-					Dispatched(communicationContext, email);
+					Error(communicationContext, email);
 					break;
 				case DispatchStatus.Dispatched:
-					Error(communicationContext, email);
+					Dispatched(communicationContext, email);
 					break;
 			}
 		}
