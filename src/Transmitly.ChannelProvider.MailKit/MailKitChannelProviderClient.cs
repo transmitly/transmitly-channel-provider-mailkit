@@ -29,8 +29,6 @@ namespace Transmitly.MailKit
 	{
 		private readonly MailKitConfigurationOptions _optionObj = Guard.AgainstNull(optionObj);
 
-		public override IReadOnlyCollection<string>? RegisteredEvents => [DeliveryReportEvent.Name.Delivered(), DeliveryReportEvent.Name.Dispatched(), DeliveryReportEvent.Name.Error()];
-
 		public override async Task<IReadOnlyCollection<IDispatchResult?>> DispatchAsync(IEmail email, IDispatchCommunicationContext communicationContext, CancellationToken cancellationToken)
 		{
 			Guard.AgainstNull(email);
@@ -80,7 +78,7 @@ namespace Transmitly.MailKit
 		{
 			switch (commResult.DispatchStatus)
 			{
-				case DispatchStatus.Error:
+				case DispatchStatus.Exception:
 					Error(communicationContext, email, [commResult]);
 					break;
 				case DispatchStatus.Dispatched:
