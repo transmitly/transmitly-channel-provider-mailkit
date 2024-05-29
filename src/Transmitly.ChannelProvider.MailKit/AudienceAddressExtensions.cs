@@ -18,7 +18,7 @@ namespace Transmitly.MailKit
 {
 	internal static class AudienceAddressExtensions
 	{
-		public static MailboxAddress ToMailboxAddress(this IAudienceAddress internetAddress)
+		public static MailboxAddress ToMailboxAddress(this IIdentityAddress internetAddress)
 		{
 			Guard.AgainstNull(internetAddress);
 
