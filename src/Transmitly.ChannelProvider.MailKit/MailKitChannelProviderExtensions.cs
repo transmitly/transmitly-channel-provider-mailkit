@@ -31,7 +31,7 @@ namespace Transmitly
 			var optionObj = new MailKitConfigurationOptions();
 			options(optionObj);
 
-			communicationsClientBuilder.AddChannelProvider<MailKitChannelProviderClient, IEmail>(Id.ChannelProvider.MailKit(providerId), optionObj, Id.Channel.Email());
+			communicationsClientBuilder.ChannelProvider.Add<MailKitChannelProviderClient, IEmail>(Id.ChannelProvider.MailKit(providerId), optionObj, Id.Channel.Email());
 			return communicationsClientBuilder;
 		}
 	}
