@@ -1,4 +1,8 @@
-# Transmitly.ChannelProvider.MailKit
+# ⚠️ This repository has been archived. 
+Development has moved to the [Transmitly SMTP Channel Provider Repository](https://github.com/transmitly/transmitly-channelprovider-smtp).
+------------------------
+
+## Transmitly.ChannelProvider.MailKit
 
 A [Transmitly](https://github.com/transmitly/transmitly) channel provider that enables sending Email communications through SMTP using [MailKit](https://github.com/jstedfast/MailKit)
 
