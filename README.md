@@ -1,5 +1,5 @@
 # ⚠️ This repository has been archived. 
-Development has moved to the [Transmitly SMTP Channel Provider Repository](https://github.com/transmitly/transmitly-channelprovider-smtp).
+Development has moved to the [Transmitly SMTP Channel Provider Repository](https://github.com/transmitly/transmitly-channel-provider-smtp).
 ------------------------
 
 ## Transmitly.ChannelProvider.MailKit
